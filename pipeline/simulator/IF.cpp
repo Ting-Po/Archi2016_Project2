@@ -1,5 +1,5 @@
 #include "IF.h"
-#include <stdio.h>
+
 
 IF::IF()
 {
@@ -31,7 +31,7 @@ IF::~IF()
     //dtor
 }
 
-void IF::IFdo(InstruM* ins,Reg* r, IF_ID* if_id)
+void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
 {
     this->instruction = ins->Ins[this->pc];
     this->opcode = ins->rtopcode(this->pc);
@@ -160,7 +160,7 @@ void IF::IFdo(InstruM* ins,Reg* r, IF_ID* if_id)
 
 
         if(this->stall == 1){
-             printf("IF-instruction: 0x%08X to_be stalled\n",this->instruction);
+             fprintf(snap,"IF: 0x%08X to_be_stalled\n",this->instruction);
         this->stall = 0;
             return;
         }
@@ -203,14 +203,14 @@ void IF::IFdo(InstruM* ins,Reg* r, IF_ID* if_id)
 
 
     if(this->stall == 1){
-        printf("IF-instruction: 0x%08X to_be stalled\n",this->instruction);
+        fprintf(snap,"IF: 0x%08X to_be_stalled\n",this->instruction);
         this->stall = 0;
     }else{
     if(this->PCSel == 0){
         this->pc = this->pc + 4;
-        printf("IF-instruction: 0x%08X\n",this->instruction);
+        fprintf(snap,"IF: 0x%08X\n",this->instruction);
     }else{
-        printf("IF-instruction: 0x%08X to_be_flushed\n",this->instruction);
+        fprintf(snap,"IF: 0x%08X to_be_flushed\n",this->instruction);
 
         if_id->After_IF = 0;
 

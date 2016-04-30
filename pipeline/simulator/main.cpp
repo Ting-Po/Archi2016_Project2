@@ -139,9 +139,12 @@ WB* wb = new WB();
         if(ifif->opcode==0x3f && id->opcode == 0x3f && ex->opcode == 0x3f && mem->opcode == 0x3f && wb->opcode == 0x3f){
             break;
         }
-        printf("cycle: %d\n",cycle);
-        printf("IF-PC: %X\n",ifif->pc);
+        fprintf(snap,"cycle %d\n",cycle);
 
+        for(i=0;i<32;i++){
+            fprintf(snap, "$%02d: 0x%08X\n", i, reg->reg[i]);
+        }
+        fprintf(snap,"PC: 0x%08X\n",ifif->pc);
         /*
         if(cycle == 6){
             printf("if_id out: %s\n",if_id->out);
@@ -155,30 +158,36 @@ WB* wb = new WB();
         mem->MEMdo(id_ex,ex,if_id,n,ex_mem,mem_wb);
         ex->Exdo(ifif,id,if_id,id_ex,ex_mem);
         id->IDdo(if_id,id_ex,ifif,reg);
-        ifif->IFdo(m,reg,if_id);
+        ifif->IFdo(snap,m,reg,if_id);
 
         //printf("cycle: %d\n",cycle);
         //printf("IF-PC: %d\n",ifif->pc);
        // printf("IF-instruction: %08x\n", ifif->instruction);
         if(id->stall == 1){
-            printf("ID-instruction: %s to_be stall\n", id->out);
+            fprintf(snap,"ID: %s to_be_stalled\n", id->out);
             id->stall = 0;
         }else{
         if(id->forwarding == 1){
-        printf("ID-instruction: %s fwd_EX-DM\n", id->out);
+            if(ex->fwd_rsrt == 1)
+            fprintf(snap,"ID: %s fwd_EX-DM_rs_$%d\n", id->out,ex->ex_memdst);
+            else
+            fprintf(snap,"ID: %s fwd_EX-DM_rt_$%d\n", id->out,ex->ex_memdst);
             id->forwarding = 0;
         }else{
-        printf("ID-instruction: %s\n", id->out);
+        fprintf(snap,"ID: %s\n", id->out);
             }
         }
         if(ex->forwarding == 1){
-        printf("EX-instruction: %s fwd_EX-DM\n", ex->out);
+            if(ex->fwd_rsrt == 1)
+            fprintf(snap,"EX: %s fwd_EX-DM_rs_$%d\n", ex->out,ex->ex_memdst);
+            else
+            fprintf(snap,"EX: %s fwd_EX-DM_rt_$%d\n", ex->out,ex->ex_memdst);
         ex->forwarding = 0;
         }else{
-        printf("EX-instruction: %s\n", ex->out);
+        fprintf(snap,"EX: %s\n", ex->out);
         }
-        printf("MEM-instruction: %s\n", mem->out);
-        printf("WB-instruction: %s\n", wb->out);
+        fprintf(snap,"DM: %s\n", mem->out);
+        fprintf(snap,"WB: %s\n\n\n", wb->out);
         cycle++;
 
 

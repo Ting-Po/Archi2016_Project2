@@ -3,6 +3,8 @@
 #include "InstruM.h"
 #include "Reg.h"
 #include "IF_ID.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 
 
@@ -22,7 +24,7 @@ class IF
         int stall;
 
 
-        void IFdo(InstruM* ins, Reg* r,IF_ID* if_id);
+        void IFdo(FILE* snap,InstruM* ins, Reg* r,IF_ID* if_id);
 
 
     protected:

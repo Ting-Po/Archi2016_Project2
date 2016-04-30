@@ -29,6 +29,8 @@ EX::EX()
     out = "NOP";
     forwarding = 0;
     stall =0;
+    ex_memdst = 0;
+    fwd_rsrt = 0;
 }
 
 EX::~EX()
@@ -113,7 +115,7 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
     }
 
 
-    char ex_memdst;
+
         if(ex_mem->RegDst == 1){
             ex_memdst = ex_mem->rd;
         }else{
@@ -124,111 +126,141 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
         if(this->opcode == 0x00){
             switch(this->funct){
             case 0x20:
+                 if(ex_memdst == this->rt && ex_memdst!=0){
+                    this->Read_Data2 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rsrt = 0;
+                }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
-                if(ex_memdst == this->rt && ex_memdst!=0){
-                    this->Read_Data2 = ex_mem->ALUresult;
-                    this->forwarding = 1;
-                }
+
                 break;
             case 0x21:
+                 if(ex_memdst == this->rt && ex_memdst!=0){
+                    this->Read_Data2 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rsrt = 0;
+                }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
-                if(ex_memdst == this->rt && ex_memdst!=0){
-                    this->Read_Data2 = ex_mem->ALUresult;
-                    this->forwarding = 1;
-                }
+
                 break;
             case 0x22:
-                if(ex_memdst == this->rs && ex_memdst!=0){
-                    this->Read_Data1 = ex_mem->ALUresult;
-                    this->forwarding = 1;
-                }
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
+                if(ex_memdst == this->rs && ex_memdst!=0){
+                    this->Read_Data1 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
                 break;
             case 0x24:
-                if(ex_memdst == this->rs && ex_memdst!=0){
-                    this->Read_Data1 = ex_mem->ALUresult;
-                    this->forwarding = 1;
-                }
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
+                if(ex_memdst == this->rs && ex_memdst!=0){
+                    this->Read_Data1 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
                 break;
             case 0x25:
+                 if(ex_memdst == this->rt && ex_memdst!=0){
+                    this->Read_Data2 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rsrt = 0;
+                }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
-                if(ex_memdst == this->rt && ex_memdst!=0){
-                    this->Read_Data2 = ex_mem->ALUresult;
-                    this->forwarding = 1;
-                }
+
                 break;
             case 0x26:
-                if(ex_memdst == this->rs && ex_memdst!=0){
-                    this->Read_Data1 = ex_mem->ALUresult;
-                    this->forwarding = 1;
-                }
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
+                if(ex_memdst == this->rs && ex_memdst!=0){
+                    this->Read_Data1 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
                 break;
             case 0x27:
-                if(ex_memdst == this->rs && ex_memdst!=0){
-                    this->Read_Data1 = ex_mem->ALUresult;
-                    this->forwarding = 1;
-                }
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
+                if(ex_memdst == this->rs && ex_memdst!=0){
+                    this->Read_Data1 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
                 break;
             case 0x28:
-                if(ex_memdst == this->rs && ex_memdst!=0){
-                    this->Read_Data1 = ex_mem->ALUresult;
-                    this->forwarding = 1;
-                }
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
+                if(ex_memdst == this->rs && ex_memdst!=0){
+                    this->Read_Data1 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
                 break;
             case 0x2A:
-                if(ex_memdst == this->rs && ex_memdst!=0){
-                    this->Read_Data1 = ex_mem->ALUresult;
-                    this->forwarding = 1;
-                }
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
+                if(ex_memdst == this->rs && ex_memdst!=0){
+                    this->Read_Data1 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
                 break;
             case 0x00:
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
                 break;
             case 0x02:
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
                 break;
             case 0x03:
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
                 break;
             default:
@@ -240,97 +272,117 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x09:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x23:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x21:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x25:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x20:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x24:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x0C:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x0D:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x0E:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x0A:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
+                    this->fwd_rsrt = 1;
                 }
                 break;
             case 0x04:
-                if(ex_memdst == if_id->rs && ex_memdst!=0){
-                    if_id->Read_Data1 = ex_mem->ALUresult;
-                    if_id->forwarding = 1;
-                }
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
+                if(ex_memdst == if_id->rs && ex_memdst!=0){
+                    if_id->Read_Data1 = ex_mem->ALUresult;
+                    if_id->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
                 break;
             case 0x05:
-                if(ex_memdst == if_id->rs && ex_memdst!=0){
-                    if_id->Read_Data1 = ex_mem->ALUresult;
-                    if_id->forwarding = 1;
-                }
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
+                if(ex_memdst == if_id->rs && ex_memdst!=0){
+                    if_id->Read_Data1 = ex_mem->ALUresult;
+                    if_id->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
                 break;
             case 0x07:
-                if(ex_memdst == if_id->rs && ex_memdst!=0){
-                    if_id->Read_Data1 = ex_mem->ALUresult;
-                    if_id->forwarding = 1;
-                }
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
+                    this->fwd_rsrt = 0;
                 }
+                if(ex_memdst == if_id->rs && ex_memdst!=0){
+                    if_id->Read_Data1 = ex_mem->ALUresult;
+                    if_id->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
                 break;
             default :
                 break;

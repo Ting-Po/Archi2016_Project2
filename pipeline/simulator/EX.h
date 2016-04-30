@@ -37,6 +37,8 @@ class EX
         int address;
         char* out;
         int stall;
+        char ex_memdst;
+        int fwd_rsrt;
 
         int forwarding;
         void Exdo(IF* ifif, ID* id,IF_ID* if_id,ID_EX* id_ex, EX_MEM* ex_mem);

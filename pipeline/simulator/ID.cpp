@@ -8,7 +8,7 @@ ID::ID()
     opcode = -1;
     instruction = -1;
     forwarding = 0;
-    out = "NOP";
+    strcpy(out , "NOP");
     Read_Data1=-1;
     Read_Data2=-1;
     immed=-1;
@@ -33,7 +33,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
 {
 
     this->isNOP = if_id->isNOP;
-    this->out = if_id->out;
+    strcpy(this->out , if_id->out);
     this->forwarding = if_id->forwarding;
     this->instruction = if_id->After_IF;
     this->opcode = if_id->opcode;
@@ -58,7 +58,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
     }
 
     id_ex->isNOP = this->isNOP;
-    id_ex->out = this->out;
+    strcpy(id_ex->out , this->out);
     id_ex->instruction = this->instruction;
     id_ex->rt = this->rt;
     id_ex->rd = this->rd;

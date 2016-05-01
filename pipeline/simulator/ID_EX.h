@@ -1,5 +1,6 @@
 #ifndef ID_EX_H
 #define ID_EX_H
+#include<cstring>
 
 
 
@@ -30,7 +31,7 @@ class ID_EX
         char rs;
         char shamt;
         int address;
-        char* out;
+        char out[8];
         int isNOP;
 
     protected:

@@ -1,6 +1,6 @@
 #ifndef MEM_WB_H
 #define MEM_WB_H
-
+#include<cstring>
 
 
 class MEM_WB
@@ -18,7 +18,7 @@ class MEM_WB
         char opcode;
         char rt;
         char rd;
-        char* out;
+        char out[8];
         int isNOP;
     protected:
     private:

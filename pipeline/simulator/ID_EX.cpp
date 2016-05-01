@@ -25,7 +25,7 @@ ID_EX::ID_EX()
     rs=-1;
     shamt=-1;
     address=-1;
-    out = "NOP";
+    strcpy(out , "NOP");
     isNOP = 0;
 }
 

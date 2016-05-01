@@ -12,7 +12,7 @@ MEM_WB::MEM_WB()
      instruction = 0;
      rt = -1;
      rd = -1;
-     out = "NOP";
+     strcpy(out , "NOP");
      isNOP = 0;
     //ctor
 }

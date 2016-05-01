@@ -20,7 +20,7 @@ IF_ID::IF_ID()
     shamt=-1;
     address=-1;
 
-    out = "NOP";
+    strcpy(out , "NOP");
     forwarding = 0;
     isNOP = 0;
 

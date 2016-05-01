@@ -2,6 +2,7 @@
 #define WB_H
 #include "Reg.h"
 #include "MEM_WB.h"
+#include<cstring>
 
 
 class WB
@@ -19,7 +20,7 @@ class WB
         char opcode;
         char rt;
         char rd;
-        char* out;
+        char out[8];
         int isNOP;
         void WBdo(MEM_WB* mem_wb, Reg* r);
     protected:

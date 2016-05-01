@@ -1,5 +1,6 @@
 #ifndef IF_ID_H
 #define IF_ID_H
+#include<cstring>
 
 
 
@@ -23,7 +24,7 @@ class IF_ID
         char rs;
         char shamt;
         int address;
-        char* out;
+        char out[8];
         int forwarding;
         int isNOP;
 

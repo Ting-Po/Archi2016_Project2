@@ -13,7 +13,7 @@ WB::WB()
      instruction = 0;
      rt = -1;
      rd = -1;
-     out = "NOP";
+     strcpy(out , "NOP");
      isNOP = 0;
 }
 
@@ -25,7 +25,7 @@ WB::~WB()
 void WB::WBdo(MEM_WB* mem_wb, Reg* r)
 {
     this->isNOP = mem_wb->isNOP;
-    this->out = mem_wb->out;
+    strcpy(this->out , mem_wb->out);
 
      this->opcode = mem_wb->opcode;
      this->Readdata = mem_wb->Readdata;

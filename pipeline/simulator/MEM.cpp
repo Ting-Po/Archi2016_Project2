@@ -17,7 +17,7 @@ MEM::MEM()
     instruction = 0;
     rt = -1;
     rd = -1;
-    out = "NOP";
+    strcpy(out , "NOP");
     stall = 0;
     isNOP = 0;
     //ctor
@@ -29,7 +29,7 @@ MEM::~MEM()
 }
 void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, MEM_WB* mem_wb)
 {
-    this->out = ex_mem->out;
+    strcpy(this->out , ex_mem->out);
     this->isNOP = ex_mem->isNOP;
 
 
@@ -403,7 +403,7 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
 
 
        mem_wb->isNOP = this->isNOP;
-        mem_wb->out = this->out;
+        strcpy(mem_wb->out , this->out);
         mem_wb->ALUresult = ex_mem->ALUresult;
         mem_wb->MemtoReg = ex_mem->MemtoReg;
         mem_wb->RegWrite = ex_mem->RegWrite;

@@ -16,7 +16,7 @@ EX_MEM::EX_MEM()
     rd=-1;
 
     ALUresult = -1;
-    out = "NOP";
+    strcpy(out , "NOP");
     isNOP = 0;
 }
 

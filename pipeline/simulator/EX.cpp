@@ -26,7 +26,7 @@ EX::EX()
     rs=0;
     shamt=0;
     address=0;
-    out = "NOP";
+    strcpy(out , "NOP");
     forwarding = 0;
     stall =0;
     ex_memdst = 0;
@@ -44,7 +44,7 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
 
 
    this->isNOP = id_ex->isNOP;
-    this->out = id_ex->out;
+    strcpy(this->out , id_ex->out);
     this->ALUSrc = id_ex->ALUSrc;
     this->RegDst = id_ex->RegDst;
     this->RegWrite = id_ex->RegWrite;
@@ -749,7 +749,7 @@ if(this->isNOP != 1){
       ex_mem->MemRead = this->MemRead;
       ex_mem->MemtoReg = this->MemtoReg;
       ex_mem->RegDst = this->RegDst;
-       ex_mem->out = this->out;
+       strcpy(ex_mem->out , this->out);
       ex_mem->instruction = this->instruction;
       ex_mem->Read_Data2 = this->Read_Data2;
       ex_mem->rt = this->rt;
@@ -865,7 +865,7 @@ if(this->isNOP != 1){
         if(this->stall == 1){
         ifif->stall = 1;
         id->stall = 1;
-        id_ex->out = "NOP";
+        strcpy(id_ex->out , "NOP");
         id_ex->isNOP = 1;
 
         /*

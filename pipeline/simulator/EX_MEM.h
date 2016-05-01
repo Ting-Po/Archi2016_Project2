@@ -1,6 +1,6 @@
 #ifndef EX_MEM_H
 #define EX_MEM_H
-
+#include<cstring>
 
 
 class EX_MEM
@@ -19,7 +19,7 @@ class EX_MEM
         char rt;
         char rd;
         char opcode;
-        char* out;
+        char out[8];
         int isNOP;
 
         int ALUresult;

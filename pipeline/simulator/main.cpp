@@ -14,6 +14,7 @@
 #include "MEM.h"
 #include "MEM_WB.h"
 #include "WB.h"
+#include<cstring>
 
 
 using namespace std;
@@ -203,9 +204,14 @@ WB* wb = new WB();
 
     }
 
-    char* a;
-    a= "NOP";
-    printf("a == b :%d\n",id_ex->out=="NOP");
+    char a[4];
+    char b[4];
+    strcpy(a,"NOP");
+    strcpy(b,a);
+
+    printf("a == b :%d\n",a=="NOP");
+    printf("a = %s\n",a);
+    printf("b = %s\n",b);
   //  printf("%s\n",a);
     //printf("%s\n",b);
 

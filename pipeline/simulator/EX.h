@@ -5,6 +5,7 @@
 #include "IF_ID.h"
 #include "IF.h"
 #include"ID.h"
+#include<cstring>
 
 
 class EX
@@ -35,7 +36,7 @@ class EX
         char rs;
         char shamt;
         int address;
-        char* out;
+        char out[8];
         int stall;
         char ex_memdst;
         int fwd_rsrt;

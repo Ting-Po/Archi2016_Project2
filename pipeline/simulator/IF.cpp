@@ -8,7 +8,7 @@ IF::IF()
     PCSel = -1;
     instruction = -1;
     opcode = -1;
-    out = "NOP";
+    strcpy(out,"NOP");
     funct = -1;
     stall =0;
     isNOP = 0;
@@ -21,7 +21,7 @@ IF::IF(int pc){
     this->PCSel = -1;
     this->instruction = -1;
     this->opcode = -1;
-    this->out = "NOP";
+    strcpy(this->out,"NOP");
     this->funct = -1;
     this->stall = 0;
     this->isNOP = 0;
@@ -43,43 +43,43 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
        if(this->opcode == 0x00){
             switch(this->funct){
         case 0x20:
-            this->out = "ADD";
+            strcpy(this->out,"ADD");
             break;
         case 0x21:
-            this->out = "ADDU";
+            strcpy(this->out,"ADDU");
             break;
         case 0x22:
-            this->out = "SUB";
+            strcpy(this->out,"SUB");
             break;
         case 0x24:
-            this->out = "AND";
+            strcpy(this->out ,"AND");
             break;
         case 0x25:
-            this->out = "OR";
+            strcpy(this->out ,"OR");
             break;
         case 0x26:
-            this->out = "XOR";
+            strcpy(this->out ,"XOR");
             break;
         case 0x27:
-            this->out = "NOR";
+            strcpy(this->out , "NOR");
             break;
         case 0x28:
-            this->out = "NAND";
+            strcpy(this->out , "NAND");
             break;
         case 0x2A:
-            this->out = "SLT";
+            strcpy(this->out , "SLT");
             break;
         case 0x00:
-            this->out = "SLL";
+            strcpy(this->out , "SLL");
             break;
         case 0x02:
-            this->out = "SRL";
+            strcpy(this->out , "SRL");
             break;
         case 0x03:
-            this->out = "SRA";
+            strcpy(this->out , "SRA");
             break;
         case 0x08:
-            this->out = "JR";
+            strcpy(this->out , "JR");
             break;
         default:
                 break;
@@ -87,68 +87,68 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
         }else{
             switch(this->opcode){
             case 0x08:{
-                this->out = "ADDI";
+                strcpy(this->out , "ADDI");
                 break;
             }
             case 0x09:
-                this->out = "ADDIU";
+                strcpy(this->out , "ADDIU");
                 break;
             case 0x23:
-                this->out = "LW";
+                strcpy(this->out , "LW");
                 break;
             case 0x21:
-                this->out = "LH";
+                strcpy(this->out , "LH");
                 break;
             case 0x25:
-                this->out = "LHU";
+                strcpy(this->out , "LHU");
                 break;
             case 0x20:
-                this->out = "LB";
+                strcpy(this->out , "LB");
                 break;
             case 0x24:
-                this->out = "LBU";
+                strcpy(this->out , "LBU");
                 break;
             case 0x2B:
-                this->out = "SW";
+                strcpy(this->out , "SW");
                 break;
             case 0x29:
-                this->out = "SH";
+                strcpy(this->out , "SH");
                 break;
             case 0x28:
-                this->out = "SB";
+                strcpy(this->out , "SB");
                 break;
             case 0x0F:
-                this->out = "LUI";
+                strcpy(this->out , "LUI");
                 break;
             case 0x0C:
-                this->out = "ANDI";
+                strcpy(this->out , "ANDI");
                 break;
             case 0x0D:
-                this->out = "ORI";
+                strcpy(this->out , "ORI");
                 break;
             case 0x0E:
-                this->out = "NORI";
+                strcpy(this->out , "NORI");
                 break;
             case 0x0A:
-                this->out = "SLTI";
+                strcpy(this->out , "SLTI");
                 break;
             case 0x04:
-                this->out = "BEQ";
+                strcpy(this->out , "BEQ");
                 break;
             case 0x05:
-                this->out = "BNE";
+                strcpy(this->out , "BNE");
                 break;
             case 0x07:
-                this->out = "BGTZ";
+                strcpy(this->out , "BGTZ");
                 break;
             case 0x02:
-                this->out = "J";
+                strcpy(this->out , "J");
                 break;
             case 0x03:
-                this->out = "JAL";
+                strcpy(this->out , "JAL");
                 break;
             case 0x3F:
-                this->out = "HALT";
+                strcpy(this->out , "HALT");
     if_id->rs = -1;
     if_id->rt = -1;
     if_id->rd = -1;
@@ -197,11 +197,11 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
 
 
 
-    if_id->out = this->out;
+    strcpy(if_id->out , this->out);
 
     if(this->instruction == 0){
-        this->out = "NOP";
-        if_id->out = this->out;
+        strcpy(this->out , "NOP");
+        strcpy(if_id->out , this->out);
         return ;
     }
 
@@ -231,7 +231,7 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
         if_id->unimmed = 0;
         if_id->Read_Data1 = 0;
         if_id->Read_Data2 = 0;
-        if_id->out = "NOP";
+        strcpy(if_id->out , "NOP");
 
         this->pc = this->pc_branch;
         }

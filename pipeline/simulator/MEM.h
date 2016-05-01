@@ -6,6 +6,7 @@
 #include "EX.h"
 #include "IF_ID.h"
 #include "ID_EX.h"
+#include<cstring>
 
 
 class MEM
@@ -28,7 +29,7 @@ class MEM
         char opcode;
 
         int instruction;
-        char* out;
+        char out[8];
         int stall;
         int isNOP;
 

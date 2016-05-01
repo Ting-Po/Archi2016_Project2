@@ -4,6 +4,7 @@
 #include "ID_EX.h"
 #include "Reg.h"
 #include "IF.h"
+#include<cstring>
 
 
 class ID
@@ -27,7 +28,7 @@ class ID
         char shamt;
         int address;
 
-        char* out;
+        char out[8];
         int forwarding;
         int stall;
         int isNOP;

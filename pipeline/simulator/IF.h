@@ -5,6 +5,7 @@
 #include "IF_ID.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include<cstring>
 
 
 
@@ -20,7 +21,7 @@ class IF
         int instruction;
         char opcode;
         char funct;
-        char* out;
+        char out[8];
         int stall;
         int isNOP;
 

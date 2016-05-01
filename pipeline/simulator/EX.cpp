@@ -30,7 +30,8 @@ EX::EX()
     forwarding = 0;
     stall =0;
     ex_memdst = 0;
-    fwd_rsrt = 0;
+    fwd_rt = 0;
+    fwd_rs = 0;
     isNOP = 0;
 }
 
@@ -39,9 +40,12 @@ EX::~EX()
     //dtor
 }
 
-void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
+void EX::Exdo(int* err,IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
 {
 
+
+   this->fwd_rs = 0;
+   this->fwd_rt = 0;
 
    this->isNOP = id_ex->isNOP;
     strcpy(this->out , id_ex->out);
@@ -426,12 +430,12 @@ if(this->isNOP != 1){
                  if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -439,12 +443,12 @@ if(this->isNOP != 1){
                  if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -452,12 +456,12 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -465,12 +469,12 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -478,12 +482,12 @@ if(this->isNOP != 1){
                  if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -491,12 +495,12 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -504,12 +508,12 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -517,12 +521,12 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -530,12 +534,12 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -543,21 +547,21 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 break;
             case 0x02:
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 break;
             case 0x03:
                 if(ex_memdst == this->rt && ex_memdst!=0){
                     this->Read_Data2 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 break;
             default:
@@ -569,14 +573,14 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             case 0x09:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
 
@@ -584,35 +588,35 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             case 0x21:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             case 0x25:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             case 0x20:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             case 0x24:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
 
@@ -620,28 +624,28 @@ if(this->isNOP != 1){
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             case 0x0D:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             case 0x0E:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             case 0x0A:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
                     this->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             /*
@@ -700,12 +704,12 @@ if(this->isNOP != 1){
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -713,12 +717,12 @@ if(this->isNOP != 1){
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -726,12 +730,12 @@ if(this->isNOP != 1){
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
-                    this->fwd_rsrt = 0;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
-                    this->fwd_rsrt = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             default:
@@ -759,17 +763,50 @@ if(this->isNOP != 1){
 
 
 
+     unsigned char rssign = (unsigned int)this->Read_Data1>>31;
+     unsigned char rtsign=0;
+     int num  = 0;
+    unsigned char rdsign = 0;
+    int rttrans = 0;
+    unsigned char immedsign = 0;
 
 
       if(this->opcode == 0x00){
             switch(this->funct){
         case 0x20:
+            num = Read_Data1 + Read_Data2;
+            rdsign = (unsigned int)num>>31;
+            if( (rssign==0) & (rtsign == 0 )){
+                if(rdsign==1){
+                err[1] = 1;
+                }
+            }
+            if( (rssign==1) & (rtsign ==1 )){
+                if(rdsign==0){
+                err[1] = 1;
+                }
+            }
             ex_mem->ALUresult = Read_Data1 + Read_Data2;
             break;
         case 0x21:
             ex_mem->ALUresult = Read_Data1 + Read_Data2;
             break;
         case 0x22:
+            rttrans = ~(Read_Data2)+1;
+            rtsign = (unsigned int)rttrans>>31;
+            num = Read_Data1 + rttrans;
+            rdsign = (unsigned int)num>>31;
+            if( (rssign==0) & (rtsign == 0 )){
+                if(rdsign==1){
+                    err[1] = 1;
+                }
+            }
+            if( (rssign==1) & (rtsign ==1 )){
+                if(rdsign==0){
+                    err[1] = 1;
+                }
+            }
+
             ex_mem->ALUresult = Read_Data1 - Read_Data2;
             break;
         case 0x24:
@@ -806,6 +843,20 @@ if(this->isNOP != 1){
         }else{
             switch(this->opcode){
             case 0x08:{
+                immedsign = (unsigned int)signimmed>>31;
+                num = Read_Data1 + signimmed;
+                rtsign = (unsigned int)num>>31;
+                if( (rssign==0) & (immedsign==0 )){
+                    if(rtsign == 1){
+                        err[1] = 1;
+                    }
+                }
+                if( (rssign == 1) & (immedsign == 1 )){
+                    if(rtsign==0){
+                        err[1] = 1;
+                    }
+                }
+
                 ex_mem->ALUresult = Read_Data1 + signimmed;
                 break;
             }
@@ -813,27 +864,132 @@ if(this->isNOP != 1){
                 ex_mem->ALUresult = Read_Data1 +signimmed;
                 break;
             case 0x23:
+                immedsign = (unsigned int)signimmed>>31;
+                num = Read_Data1 + signimmed;
+                rtsign = (unsigned int)num>>31;
+                if( (rssign==0) & (immedsign==0 )){
+                    if(rtsign==1){
+                        err[1] = 1;
+                    }
+                }
+                if( (rssign==1) & (immedsign == 1)){
+                    if(rtsign==0){
+                        err[1] = 1;
+                    }
+                }
+
                 ex_mem->ALUresult = Read_Data1 + signimmed;
                 break;
             case 0x21:
+                immedsign = (unsigned int)signimmed>>31;
+                num = Read_Data1 + signimmed;
+                rtsign = (unsigned int)num>>31;
+                if( (rssign==0) & (immedsign==0 )){
+                        if(rtsign==1){
+                            err[1] = 1;
+                    }
+                }
+                if( (rssign==1) & (immedsign==1 )){
+                    if(rtsign==0){
+                        err[1] = 1;
+                    }
+                }
                 ex_mem->ALUresult = Read_Data1 + signimmed;
                 break;
             case 0x25:
+                immedsign = (unsigned int)signimmed>>31;
+                num = Read_Data1 + signimmed;
+                rtsign = (unsigned int)num>>31;
+                if( (rssign==0) & (immedsign==0 )){
+                        if(rtsign==1){
+                            err[1] = 1;
+                    }
+                }
+                if( (rssign==1) & (immedsign==1 )){
+                    if(rtsign==0){
+                        err[1] = 1;
+                    }
+                }
                 ex_mem->ALUresult = Read_Data1 +signimmed;
                 break;
             case 0x20:
+                immedsign = (unsigned int)signimmed>>31;
+                num = Read_Data1 + signimmed;
+                rtsign = (unsigned int)num>>31;
+                if( (rssign==0) & (immedsign==0 )){
+                        if(rtsign==1){
+                            err[1] = 1;
+                    }
+                }
+                if( (rssign==1) & (immedsign==1 )){
+                    if(rtsign==0){
+                        err[1] = 1;
+                    }
+                }
                 ex_mem->ALUresult = Read_Data1 + signimmed;
                 break;
             case 0x24:
+                immedsign = (unsigned int)signimmed>>31;
+                num = Read_Data1 + signimmed;
+                rtsign = (unsigned int)num>>31;
+                if( (rssign==0) & (immedsign==0 )){
+                        if(rtsign==1){
+                            err[1] = 1;
+                    }
+                }
+                if( (rssign==1) & (immedsign==1 )){
+                    if(rtsign==0){
+                        err[1] = 1;
+                    }
+                }
                 ex_mem->ALUresult =  Read_Data1 + signimmed;
                 break;
             case 0x2B:
+                immedsign = (unsigned int)signimmed>>31;
+                num = Read_Data1 + signimmed;
+                rtsign = (unsigned int)num>>31;
+                if( (rssign==0) & (immedsign==0 )){
+                        if(rtsign==1){
+                            err[1] = 1;
+                    }
+                }
+                if( (rssign==1) & (immedsign==1 )){
+                    if(rtsign==0){
+                        err[1] = 1;
+                    }
+                }
                 ex_mem->ALUresult = Read_Data1 + signimmed;
                 break;
             case 0x29:
+                immedsign = (unsigned int)signimmed>>31;
+                num = Read_Data1 + signimmed;
+                rtsign = (unsigned int)num>>31;
+                if( (rssign==0) & (immedsign==0 )){
+                        if(rtsign==1){
+                            err[1] = 1;
+                    }
+                }
+                if( (rssign==1) & (immedsign==1 )){
+                    if(rtsign==0){
+                        err[1] = 1;
+                    }
+                }
                 ex_mem->ALUresult = Read_Data1 + signimmed;
                 break;
             case 0x28:
+                immedsign = (unsigned int)signimmed>>31;
+                num = Read_Data1 + signimmed;
+                rtsign = (unsigned int)num>>31;
+                if( (rssign==0) & (immedsign==0 )){
+                        if(rtsign==1){
+                            err[1] = 1;
+                    }
+                }
+                if( (rssign==1) & (immedsign==1 )){
+                    if(rtsign==0){
+                        err[1] = 1;
+                    }
+                }
                 ex_mem->ALUresult = Read_Data1 + signimmed;
                 break;
             case 0x0F:

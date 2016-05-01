@@ -22,7 +22,7 @@ WB::~WB()
     //dtor
 }
 
-void WB::WBdo(MEM_WB* mem_wb, Reg* r)
+void WB::WBdo(int* err,MEM_WB* mem_wb, Reg* r)
 {
     this->isNOP = mem_wb->isNOP;
     strcpy(this->out , mem_wb->out);
@@ -59,6 +59,10 @@ void WB::WBdo(MEM_WB* mem_wb, Reg* r)
 
 
      if(this->RegWrite == 1){
+        if(destination == 0){
+            err[0] = 1;
+            return;
+        }
         r->reg[destination] = WriteData;
      }
 

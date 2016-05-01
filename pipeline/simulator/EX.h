@@ -39,11 +39,12 @@ class EX
         char out[8];
         int stall;
         char ex_memdst;
-        int fwd_rsrt;
+        int fwd_rs;
+        int fwd_rt;
 
         int forwarding;
         int isNOP;
-        void Exdo(IF* ifif, ID* id,IF_ID* if_id,ID_EX* id_ex, EX_MEM* ex_mem);
+        void Exdo(int* err,IF* ifif, ID* id,IF_ID* if_id,ID_EX* id_ex, EX_MEM* ex_mem);
 
     protected:
     private:

@@ -27,7 +27,7 @@ MEM::~MEM()
 {
     //dtor
 }
-void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, MEM_WB* mem_wb)
+void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, MEM_WB* mem_wb)
 {
     strcpy(this->out , ex_mem->out);
     this->isNOP = ex_mem->isNOP;
@@ -433,17 +433,68 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
     if(this->MemWrite == 1){
         switch(this->opcode){
         case 0x2B:
+            if( this->Address >=1024){
+                err[2] = 1;
+            }
+            if( (this->Address)+1 >=1024){
+                err[2] = 1;
+            }
+            if( (this->Address)+2 >=1024){
+                err[2] = 1;
+            }
+            if( (this->Address)+3 >=1024){
+            err[2] = 1;
+            }
+            if( this->Address <0){
+                err[2] = 1;
+            }
+
+            if( ((this->Address)%4)!=0){
+            err[3] = 1;
+            }
+
+            if(err[2]|err[3]){
+
+            }else{
             mem->mem[this->Address] = a4;
             mem->mem[this->Address + 1] = a3;
             mem->mem[this->Address + 2] = a2;
             mem->mem[this->Address + 3] = a1;
+            }
+
             break;
         case 0x29:
+            if((this->Address) >=1024){
+                err[2] = 1;
+            }
+            if((this->Address)+1 >=1024){
+                err[2] = 1;
+            }
+            if((this->Address)<0){
+                err[2] = 1;
+            }
+            if( ((this->Address)%2)!=0){
+                err[3] = 1;
+            }
+            if(err[2]|err[3]){
+
+            }else{
             mem->mem[this->Address] = a4;
             mem->mem[this->Address+1] = a3;
+            }
             break;
         case 0x28:
+            if((this->Address) >=1024){
+                err[2] = 1;
+            }
+            if((this->Address)<0){
+                err[2] = 1;
+            }
+            if(err[2]|err[3]){
+
+            }else{
             mem->mem[this->Address] = a4;
+            }
             break;
         default :
             break;
@@ -458,6 +509,29 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
     if(this->MemRead == 1){
         switch(this->opcode){
             case 0x23:
+                if((this->Address) >=1024){
+                    err[2] = 1;
+                }
+                if((this->Address)+1 >=1024){
+                    err[2] = 1;
+                }
+                if((this->Address)+2 >=1024){
+                    err[2] = 1;
+                }
+                if((this->Address)+3 >=1024){
+                    err[2] = 1;
+                }
+                if((this->Address)<0){
+                    err[2] = 1;
+                }
+
+                if(((this->Address)%4)!=0){
+                    err[3] = 1;
+                }
+
+                if(err[2] |err[3]){
+
+            }else{
                 temp |= mem->mem[this->Address];
                 temp = temp <<8;
                 temp |= mem->mem[this->Address+1];
@@ -467,30 +541,92 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
                 temp |= mem->mem[this->Address+3];
                 this->Readdata = temp;
                 mem_wb->Readdata = temp;
+            }
                 break;
             case 0x21:
+                 if((this->Address) >=1024){
+                    err[2] = 1;
+                }
+                if((this->Address)+1 >=1024){
+                    err[2] = 1;
+                }
+                if((this->Address)<0){
+                    err[2] = 1;
+                }
+                if(((this->Address)%2)!=0){
+                    err[3] = 1;
+                }
+
+
+
+                if(err[2] |err[3]){
+
+                }else{
                 temp |=  mem->mem[this->Address];
                 temp  = temp << 8;
                 temp |=  mem->mem[this->Address+1];
                 this->Readdata = temp;
                 mem_wb->Readdata = temp;
+        }
                 break;
             case 0x25:
+                if(this->Address >=1024){
+                    err[2] = 1;
+                }
+                if((this->Address)+1 >=1024){
+                    err[2] = 1;
+                }
+                if((this->Address)<0){
+                    err[2] = 1;
+                }
+
+                if(((this->Address)%2)!=0){
+                    err[3] = 1;
+                }
+
+
+
+            if(err[2] |err[3]){
+
+            }else{
                 temp |= (mem->mem[this->Address]);
                 temp = temp << 8;
                 temp |=  (mem->mem[this->Address+1]);
                 this->Readdata = temp;
                 mem_wb->Readdata = temp;
+            }
                 break;
             case 0x20:
+                if((this->Address) >=1024){
+                    err[2] = 1;
+                }
+                if((this->Address)<0){
+                    err[2] = 1;
+                }
+
+            if(err[2]){
+
+            }else{
                  temp |= mem->mem[this->Address];
                  this->Readdata = temp;
                  mem_wb->Readdata = temp;
+            }
                  break;
             case 0x24:
+                if( this->Address >=1024){
+                    err[2] = 1;
+                }
+                if( this->Address<0){
+                    err[2] = 1;
+                }
+
+            if(err[2]){
+
+            }else{
                  temp |= mem->mem[this->Address];
                  this->Readdata = temp;
                  mem_wb->Readdata = temp;
+            }
                  break;
             default:
                 break;

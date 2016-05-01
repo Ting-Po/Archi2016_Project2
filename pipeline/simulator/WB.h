@@ -22,7 +22,7 @@ class WB
         char rd;
         char out[8];
         int isNOP;
-        void WBdo(MEM_WB* mem_wb, Reg* r);
+        void WBdo(int* err,MEM_WB* mem_wb, Reg* r);
     protected:
     private:
 };

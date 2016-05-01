@@ -33,7 +33,7 @@ class MEM
         int stall;
         int isNOP;
 
-        void MEMdo(ID_EX* id_ex,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, MEM_WB* mem_wb);
+        void MEMdo(int* err,ID_EX* id_ex,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, MEM_WB* mem_wb);
 
     protected:
     private:

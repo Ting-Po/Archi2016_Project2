@@ -140,7 +140,6 @@ WB* wb = new WB();
         if(ifif->opcode==0x3f && id->opcode == 0x3f && ex->opcode == 0x3f && mem->opcode == 0x3f && wb->opcode == 0x3f){
             break;
         }
-         printf("cycle %d\n",cycle);
         fprintf(snap,"cycle %d\n",cycle);
 
         for(i=0;i<32;i++){
@@ -149,44 +148,68 @@ WB* wb = new WB();
         fprintf(snap,"PC: 0x%08X\n",ifif->pc);
 
 
-        if(cycle == 4){
-            printf("if_id out: %s\n",if_id->out);
-            printf("if_id rs:%d rt:%d\n",if_id->rs, if_id->rt);
-            printf("ex_mem out: %s\n",ex_mem->out);
-            printf("ex_mem %d\n",ex_mem->rd);
+        if(err[0] == 1){
+            fprintf(error, "In cycle %d: Write $0 Error\n",cycle);
+        }
+        if(err[2] == 1){
+            fprintf(error, "In cycle %d: Address Overflow\n",cycle);
+        }
+        if(err[3] == 1){
+            fprintf(error, "In cycle %d: Misalignment Error\n",cycle);
+        }
+        if(err[1] == 1){
+            fprintf(error, "In cycle %d: Number Overflow\n",cycle);
         }
 
+        err[0] = 0;
+        err[1] = 0;
+        err[2] = 0;
+        err[3] = 0;
 
 
-        wb->WBdo(mem_wb,reg);
-        mem->MEMdo(id_ex,ex,if_id,n,ex_mem,mem_wb);
-        ex->Exdo(ifif,id,if_id,id_ex,ex_mem);
+
+
+
+
+        wb->WBdo(err,mem_wb,reg);
+        mem->MEMdo(err,id_ex,ex,if_id,n,ex_mem,mem_wb);
+        ex->Exdo(err,ifif,id,if_id,id_ex,ex_mem);
         id->IDdo(if_id,id_ex,ifif,reg);
         ifif->IFdo(snap,m,reg,if_id);
 
-        //printf("cycle: %d\n",cycle);
-        //printf("IF-PC: %d\n",ifif->pc);
-       // printf("IF-instruction: %08x\n", ifif->instruction);
+
         if(id->stall == 1){
             fprintf(snap,"ID: %s to_be_stalled\n", id->out);
             id->stall = 0;
         }else{
         if(id->forwarding == 1){
-            if(ex->fwd_rsrt == 1)
+            if(ex->fwd_rs == 1 && ex->fwd_rt == 1){
+            fprintf(snap,"ID: %s fwd_EX-DM_rs_$%d fwd_EX-DM_rt_$%d\n", id->out,ex->ex_memdst,ex->ex_memdst);
+            }else if(ex->fwd_rs == 1){
             fprintf(snap,"ID: %s fwd_EX-DM_rs_$%d\n", id->out,ex->ex_memdst);
-            else
+            }
+            else if(ex->fwd_rt == 1){
             fprintf(snap,"ID: %s fwd_EX-DM_rt_$%d\n", id->out,ex->ex_memdst);
+            }
             id->forwarding = 0;
+            ex->fwd_rs = 0;
+            ex->fwd_rt = 0;
         }else{
         fprintf(snap,"ID: %s\n", id->out);
             }
         }
         if(ex->forwarding == 1){
-            if(ex->fwd_rsrt == 1)
+            if(ex->fwd_rs == 1 && ex->fwd_rt == 1){
+            fprintf(snap,"EX: %s fwd_EX-DM_rs_$%d fwd_EX-DM_rt_$%d\n", ex->out,ex->ex_memdst,ex->ex_memdst);
+            }else if(ex->fwd_rs == 1){
             fprintf(snap,"EX: %s fwd_EX-DM_rs_$%d\n", ex->out,ex->ex_memdst);
-            else
+            }
+            else if(ex->fwd_rt == 1){
             fprintf(snap,"EX: %s fwd_EX-DM_rt_$%d\n", ex->out,ex->ex_memdst);
+            }
         ex->forwarding = 0;
+        ex->fwd_rs = 0;
+        ex->fwd_rt = 0;
         }else{
         fprintf(snap,"EX: %s\n", ex->out);
         }
@@ -195,25 +218,35 @@ WB* wb = new WB();
         cycle++;
 
 
-           // printf("Reg[1]: %08X\n",reg->reg[1]);
-            //printf("Reg[2]: %08X\n",reg->reg[2]);
-            //printf("Reg[3]: %08X\n",reg->reg[3]);
 
-
-
+        if(err[2]|err[3]){
+            break;
+        }
 
     }
 
-    char a[4];
-    char b[4];
-    strcpy(a,"NOP");
-    strcpy(b,a);
+     if(err[2]|err[3]){
 
-    printf("a == b :%d\n",a=="NOP");
-    printf("a = %s\n",a);
-    printf("b = %s\n",b);
-  //  printf("%s\n",a);
-    //printf("%s\n",b);
+        if(err[0] == 1){
+            fprintf(error, "In cycle %d: Write $0 Error\n",cycle);
+        }
+        if(err[2] == 1){
+            fprintf(error, "In cycle %d: Address Overflow\n",cycle);
+        }
+        if(err[3] == 1){
+            fprintf(error, "In cycle %d: Misalignment Error\n",cycle);
+        }
+        if(err[1] == 1){
+            fprintf(error, "In cycle %d: Number Overflow\n",cycle);
+        }
+    }else{
+      if(err[0] == 1){
+            fprintf(error, "In cycle %d: Write $0 Error\n",cycle);
+        }
+        if(err[1] == 1){
+            fprintf(error, "In cycle %d: Number Overflow\n",cycle);
+        }
+    }
 
 
 

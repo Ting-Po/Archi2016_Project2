@@ -20,6 +20,7 @@ class WB
         char rt;
         char rd;
         char* out;
+        int isNOP;
         void WBdo(MEM_WB* mem_wb, Reg* r);
     protected:
     private:

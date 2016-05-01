@@ -31,6 +31,7 @@ EX::EX()
     stall =0;
     ex_memdst = 0;
     fwd_rsrt = 0;
+    isNOP = 0;
 }
 
 EX::~EX()
@@ -42,6 +43,7 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
 {
 
 
+   this->isNOP = id_ex->isNOP;
     this->out = id_ex->out;
     this->ALUSrc = id_ex->ALUSrc;
     this->RegDst = id_ex->RegDst;
@@ -70,11 +72,157 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
     if_id->forwarding = 0;
 
 
+if(this->isNOP != 1){
     if(this->RegWrite == 1){
         if(this->RegDst == 1){
-                switch(this->funct){
-                    case 0x04:
+             if(if_id->opcode == 0x00){
+                if(this->opcode == 0x23|| this->opcode == 0x21 || this->opcode == 0x25 || this->opcode == 0x20 || this->opcode == 0x24){
+                    switch(if_id->funct){
+                    case 0x20:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x21:
+                        if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x22:
+                        if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x24:
+                        if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x25:
+                        if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x26:
+                        if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x27:
+                        if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x28:
+                        if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x2A:
+                        if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x00:
+                        if(if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x02:
+                        if(if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x03:
+                        if(if_id->rt == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    default :
+                        break;
+                    }
+                }
+             }else{
+                 if(this->opcode == 0x23|| this->opcode == 0x21 || this->opcode == 0x25 || this->opcode == 0x20 || this->opcode == 0x24){
+                    switch(if_id->opcode){
+                    case 0x08:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x09:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x23:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x21:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x25:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x20:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x24:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x2B:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x29:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x28:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x0C:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x0D:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x0E:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x0A:
+                        if(if_id->rs == this->rd){
+                            this->stall = 1;
+                        }
+                        break;
+                    default:
+                        break;
+                    }
+                 }
+
+                switch(if_id->opcode){
+                    case 0x04:
+                        if(if_id->rs == this->rd || if_id->rt == this->rd ){
                             this->stall =1;
                         }
                         break;
@@ -90,9 +238,156 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
                         break;
                     default:
                         break;
+                }
+             }
+        }else{
+                 if(if_id->opcode == 0x00){
+                if(this->opcode == 0x23|| this->opcode == 0x21 || this->opcode == 0x25 || this->opcode == 0x20 || this->opcode == 0x24){
+                    switch(if_id->funct){
+                    case 0x20:
+                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x21:
+                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x22:
+                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x24:
+                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x25:
+                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x26:
+                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x27:
+                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x28:
+                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x2A:
+                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x00:
+                        if(if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x02:
+                        if(if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x03:
+                        if(if_id->rt == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    default :
+                        break;
+                    }
                 }
         }else{
-                switch(this->funct){
+                if(this->opcode == 0x23|| this->opcode == 0x21 || this->opcode == 0x25 || this->opcode == 0x20 || this->opcode == 0x24){
+                    switch(if_id->opcode){
+                    case 0x08:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x09:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x23:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x21:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x25:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x20:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x24:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x2B:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x29:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x28:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x0C:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x0D:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x0E:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    case 0x0A:
+                        if(if_id->rs == this->rt){
+                            this->stall = 1;
+                        }
+                        break;
+                    default:
+                        break;
+                    }
+                 }
+
+
+                switch(if_id->opcode){
                     case 0x04:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
                             this->stall =1;
@@ -111,10 +406,11 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
                     default:
                         break;
                 }
+        }
             }
     }
 
-
+}
 
         if(ex_mem->RegDst == 1){
             ex_memdst = ex_mem->rd;
@@ -122,6 +418,7 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
             ex_memdst = ex_mem->rt;
         }
 
+    if(ex_mem->isNOP!=1){
     if(ex_mem->RegWrite == 1){
         if(this->opcode == 0x00){
             switch(this->funct){
@@ -282,6 +579,7 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
                     this->fwd_rsrt = 1;
                 }
                 break;
+
             case 0x23:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
@@ -317,6 +615,7 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
                     this->fwd_rsrt = 1;
                 }
                 break;
+
             case 0x0C:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;
@@ -345,7 +644,59 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
                     this->fwd_rsrt = 1;
                 }
                 break;
+            /*
             case 0x04:
+                printf("if_id:eeeeeeeeeeee%s\n",if_id->out);
+                if(ex_memdst == if_id->rt && ex_memdst!=0){
+                        printf("if_id: %s\n",if_id->out);
+                    if_id->Read_Data2 = ex_mem->ALUresult;
+                    if_id->forwarding = 1;
+                    this->fwd_rsrt = 0;
+                }
+                if(ex_memdst == if_id->rs && ex_memdst!=0){
+                    printf("if_id: %s\n",if_id->out);
+                    if_id->Read_Data1 = ex_mem->ALUresult;
+                    if_id->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
+                break;
+            case 0x05:
+                if(ex_memdst == if_id->rt && ex_memdst!=0){
+                    if_id->Read_Data2 = ex_mem->ALUresult;
+                    if_id->forwarding = 1;
+                    this->fwd_rsrt = 0;
+                }
+                if(ex_memdst == if_id->rs && ex_memdst!=0){
+                    if_id->Read_Data1 = ex_mem->ALUresult;
+                    if_id->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
+                break;
+            case 0x07:
+                if(ex_memdst == if_id->rt && ex_memdst!=0){
+                    if_id->Read_Data2 = ex_mem->ALUresult;
+                    if_id->forwarding = 1;
+                    this->fwd_rsrt = 0;
+                }
+                if(ex_memdst == if_id->rs && ex_memdst!=0){
+                    if_id->Read_Data1 = ex_mem->ALUresult;
+                    if_id->forwarding = 1;
+                    this->fwd_rsrt = 1;
+                }
+
+                break;
+              */
+            default :
+                break;
+            }
+
+        }
+          //printf("if_id:eeeeeeeeeeee%s\n",if_id->out);
+            if(this->opcode != 0x23 && this->opcode != 0x21 && this->opcode != 0x25 && this->opcode != 0x20 && this->opcode != 0x24){
+            switch(if_id->opcode){
+             case 0x04:
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
@@ -382,15 +733,15 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
                     if_id->forwarding = 1;
                     this->fwd_rsrt = 1;
                 }
+                break;
+            default:
+                break;
 
-                break;
-            default :
-                break;
+
             }
-
         }
     }
-
+}
 
 
       ex_mem->RegWrite = this->RegWrite;
@@ -404,6 +755,7 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
       ex_mem->rt = this->rt;
       ex_mem->rd = this->rd;
       ex_mem->opcode = this->opcode;
+      ex_mem->isNOP = this->isNOP;
 
 
 
@@ -509,11 +861,14 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
 
         ifif->stall = 0;
         id->stall = 0;
-
+        id_ex->isNOP = 0;
         if(this->stall == 1){
         ifif->stall = 1;
         id->stall = 1;
         id_ex->out = "NOP";
+        id_ex->isNOP = 1;
+
+        /*
         id_ex->ALUSrc = -1;
         id_ex->RegDst = -1;
         id_ex->RegWrite = -1;
@@ -532,11 +887,12 @@ void EX::Exdo(IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
         id_ex->rt = -1;
         id_ex->rd = -1;
 
-        id_ex->opcode = -1;
+       id_ex->opcode = -1;
         id_ex->funct = -1;
     id_ex->rs = -1;
     id_ex->shamt = -1;
     id_ex->address = -1;
+    */
     this->stall = 0;
     }
 

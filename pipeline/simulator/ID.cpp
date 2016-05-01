@@ -21,6 +21,7 @@ ID::ID()
     shamt=-1;
     address=-1;
     stall = 0;
+    isNOP = 0;
 }
 
 ID::~ID()
@@ -31,6 +32,7 @@ ID::~ID()
 void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
 {
 
+    this->isNOP = if_id->isNOP;
     this->out = if_id->out;
     this->forwarding = if_id->forwarding;
     this->instruction = if_id->After_IF;
@@ -55,6 +57,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         return;
     }
 
+    id_ex->isNOP = this->isNOP;
     id_ex->out = this->out;
     id_ex->instruction = this->instruction;
     id_ex->rt = this->rt;
@@ -239,7 +242,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         id_ex->MemWrite = 0;
         id_ex->Branch = 1;
         ifif->pc_branch = this->pc + 4* if_id->immed;
-        if(if_id->Read_Data1 == if_id->Read_Data2)
+        if(r->reg[if_id->rs] == r->reg[if_id->rt])
             ifif->PCSel = 1;
         else
             ifif->PCSel = 0;
@@ -253,7 +256,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         id_ex->MemWrite = 0;
         id_ex->Branch = 1;
         ifif->pc_branch = this->pc + 4* if_id->immed;
-        if(if_id->Read_Data1!=if_id->Read_Data2)
+        if(r->reg[if_id->rs] != r->reg[if_id->rt])
             ifif->PCSel = 1;
         else
             ifif->PCSel = 0;
@@ -267,7 +270,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         id_ex->MemWrite = 0;
         id_ex->Branch = 1;
         ifif->pc_branch = this->pc+4*if_id->immed;
-        if(if_id->Read_Data1>0)
+        if(r->reg[if_id->rs]>0)
             ifif->PCSel = 1;
         else
             ifif->PCSel = 0;

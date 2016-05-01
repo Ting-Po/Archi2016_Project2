@@ -22,6 +22,7 @@ class IF
         char funct;
         char* out;
         int stall;
+        int isNOP;
 
 
         void IFdo(FILE* snap,InstruM* ins, Reg* r,IF_ID* if_id);

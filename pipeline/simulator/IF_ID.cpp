@@ -22,6 +22,7 @@ IF_ID::IF_ID()
 
     out = "NOP";
     forwarding = 0;
+    isNOP = 0;
 
 }
 

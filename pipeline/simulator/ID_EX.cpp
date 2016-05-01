@@ -26,6 +26,7 @@ ID_EX::ID_EX()
     shamt=-1;
     address=-1;
     out = "NOP";
+    isNOP = 0;
 }
 
 ID_EX::~ID_EX()

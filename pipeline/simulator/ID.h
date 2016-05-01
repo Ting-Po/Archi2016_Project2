@@ -30,6 +30,7 @@ class ID
         char* out;
         int forwarding;
         int stall;
+        int isNOP;
         void IDdo(IF_ID* if_id, ID_EX* id_ex,IF* ifif,Reg* r);
     protected:
     private:

@@ -41,6 +41,7 @@ class EX
         int fwd_rsrt;
 
         int forwarding;
+        int isNOP;
         void Exdo(IF* ifif, ID* id,IF_ID* if_id,ID_EX* id_ex, EX_MEM* ex_mem);
 
     protected:

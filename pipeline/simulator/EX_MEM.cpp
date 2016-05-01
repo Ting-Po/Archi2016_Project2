@@ -17,6 +17,7 @@ EX_MEM::EX_MEM()
 
     ALUresult = -1;
     out = "NOP";
+    isNOP = 0;
 }
 
 EX_MEM::~EX_MEM()

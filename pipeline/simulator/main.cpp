@@ -139,20 +139,23 @@ WB* wb = new WB();
         if(ifif->opcode==0x3f && id->opcode == 0x3f && ex->opcode == 0x3f && mem->opcode == 0x3f && wb->opcode == 0x3f){
             break;
         }
+         printf("cycle %d\n",cycle);
         fprintf(snap,"cycle %d\n",cycle);
 
         for(i=0;i<32;i++){
             fprintf(snap, "$%02d: 0x%08X\n", i, reg->reg[i]);
         }
         fprintf(snap,"PC: 0x%08X\n",ifif->pc);
-        /*
-        if(cycle == 6){
+
+
+        if(cycle == 4){
             printf("if_id out: %s\n",if_id->out);
-            printf("if_id rs:%d rt:%d rd:%d\n",if_id->rs, if_id->rt, if_id->rd);
+            printf("if_id rs:%d rt:%d\n",if_id->rs, if_id->rt);
             printf("ex_mem out: %s\n",ex_mem->out);
-            printf("ex_mem  rt:%d rd:%d\n", ex_mem->rt, ex_mem->rd);
+            printf("ex_mem %d\n",ex_mem->rd);
         }
-        */
+
+
 
         wb->WBdo(mem_wb,reg);
         mem->MEMdo(id_ex,ex,if_id,n,ex_mem,mem_wb);
@@ -200,9 +203,9 @@ WB* wb = new WB();
 
     }
 
-    char* a="Bbbbbb";
-    char* b;
-    b =a;
+    char* a;
+    a= "NOP";
+    printf("a == b :%d\n",id_ex->out=="NOP");
   //  printf("%s\n",a);
     //printf("%s\n",b);
 

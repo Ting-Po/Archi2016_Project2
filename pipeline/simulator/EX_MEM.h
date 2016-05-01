@@ -20,6 +20,7 @@ class EX_MEM
         char rd;
         char opcode;
         char* out;
+        int isNOP;
 
         int ALUresult;
     protected:

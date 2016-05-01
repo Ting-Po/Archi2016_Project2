@@ -11,6 +11,7 @@ IF::IF()
     out = "NOP";
     funct = -1;
     stall =0;
+    isNOP = 0;
 
     //ctor
 }
@@ -23,6 +24,7 @@ IF::IF(int pc){
     this->out = "NOP";
     this->funct = -1;
     this->stall = 0;
+    this->isNOP = 0;
 }
 
 
@@ -159,12 +161,14 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
 
 
 
+
         if(this->stall == 1){
              fprintf(snap,"IF: 0x%08X to_be_stalled\n",this->instruction);
         this->stall = 0;
             return;
         }
 
+    if_id->isNOP = this->isNOP;
 
     if_id->After_IF = ins->Ins[this->pc];
     if_id->pc = this->pc +4;

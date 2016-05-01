@@ -31,6 +31,7 @@ class ID_EX
         char shamt;
         int address;
         char* out;
+        int isNOP;
 
     protected:
     private:

@@ -19,6 +19,7 @@ MEM::MEM()
     rd = -1;
     out = "NOP";
     stall = 0;
+    isNOP = 0;
     //ctor
 }
 
@@ -29,6 +30,7 @@ MEM::~MEM()
 void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, MEM_WB* mem_wb)
 {
     this->out = ex_mem->out;
+    this->isNOP = ex_mem->isNOP;
 
 
     unsigned char a1,a2,a3,a4;
@@ -52,7 +54,7 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
 
 
 
-
+    if(ex_mem->isNOP != 1){
     if(ex_mem->RegWrite == 1){
         if(ex_mem->RegDst == 1){
             if(if_id->opcode == 0x00){
@@ -177,6 +179,27 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
                         ex->stall = 1;
                     }
                     break;
+                case 0x04:
+                    if(ex_mem->opcode==0x23 ||ex_mem->opcode==0x21 ||ex_mem->opcode==0x25 ||ex_mem->opcode==0x20 ||ex_mem->opcode==0x24){
+                    if(if_id->rs == ex_mem->rd || if_id->rt == ex_mem->rd){
+                        ex->stall =1;
+                    }
+                    }
+                    break;
+                case 0x05:
+                    if(ex_mem->opcode==0x23 ||ex_mem->opcode==0x21 ||ex_mem->opcode==0x25 ||ex_mem->opcode==0x20 ||ex_mem->opcode==0x24){
+                    if(if_id->rs == ex_mem->rd || if_id->rt == ex_mem->rd){
+                        ex->stall =1;
+                    }
+                    }
+                    break;
+                case 0x07:
+                    if(ex_mem->opcode==0x23 ||ex_mem->opcode==0x21 ||ex_mem->opcode==0x25 ||ex_mem->opcode==0x20 ||ex_mem->opcode==0x24){
+                    if(if_id->rs == ex_mem->rd){
+                        ex->stall =1;
+                    }
+                    }
+                    break;
                 default:
                     break;
                 }
@@ -304,6 +327,27 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
                         ex->stall = 1;
                     }
                     break;
+                case 0x04:
+                    if(ex_mem->opcode==0x23 ||ex_mem->opcode==0x21 ||ex_mem->opcode==0x25 ||ex_mem->opcode==0x20 ||ex_mem->opcode==0x24){
+                    if(if_id->rs == ex_mem->rt || if_id->rt == ex_mem->rt){
+                        ex->stall =1;
+                    }
+                    }
+                    break;
+                case 0x05:
+                    if(ex_mem->opcode==0x23 ||ex_mem->opcode==0x21 ||ex_mem->opcode==0x25 ||ex_mem->opcode==0x20 ||ex_mem->opcode==0x24){
+                    if(if_id->rs == ex_mem->rt || if_id->rt == ex_mem->rt){
+                        ex->stall =1;
+                    }
+                    }
+                    break;
+                case 0x07:
+                    if(ex_mem->opcode==0x23 ||ex_mem->opcode==0x21 ||ex_mem->opcode==0x25 ||ex_mem->opcode==0x20 ||ex_mem->opcode==0x24){
+                    if(if_id->rs == ex_mem->rt){
+                        ex->stall =1;
+                    }
+                    }
+                    break;
                 default:
                     break;
                 }
@@ -316,6 +360,7 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
 
     }
 
+     if(id_ex->isNOP != 1){
     if(ex_mem->RegWrite == 1 && id_ex->RegWrite==1){
         if(ex_mem->RegDst == 1){
                 if(id_ex->RegDst == 1){
@@ -339,6 +384,9 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
                 }
         }
     }
+     }
+}
+
 
     /*
     if(ex->stall == 1){
@@ -354,6 +402,7 @@ void MEM::MEMdo(ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* ex_mem, ME
 
 
 
+       mem_wb->isNOP = this->isNOP;
         mem_wb->out = this->out;
         mem_wb->ALUresult = ex_mem->ALUresult;
         mem_wb->MemtoReg = ex_mem->MemtoReg;

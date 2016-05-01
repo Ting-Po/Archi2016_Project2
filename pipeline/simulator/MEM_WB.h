@@ -19,6 +19,7 @@ class MEM_WB
         char rt;
         char rd;
         char* out;
+        int isNOP;
     protected:
     private:
 };

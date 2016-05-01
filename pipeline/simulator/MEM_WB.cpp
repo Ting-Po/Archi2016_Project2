@@ -13,6 +13,7 @@ MEM_WB::MEM_WB()
      rt = -1;
      rd = -1;
      out = "NOP";
+     isNOP = 0;
     //ctor
 }
 

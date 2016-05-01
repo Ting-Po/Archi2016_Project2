@@ -25,6 +25,7 @@ class IF_ID
         int address;
         char* out;
         int forwarding;
+        int isNOP;
 
 
     protected:

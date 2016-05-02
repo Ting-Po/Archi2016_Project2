@@ -22,6 +22,8 @@ ID::ID()
     address=-1;
     stall = 0;
     isNOP = 0;
+    fwdrs = 0;
+    fwdrt = 0;
 }
 
 ID::~ID()
@@ -38,8 +40,10 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
     this->instruction = if_id->After_IF;
     this->opcode = if_id->opcode;
     this->pc = if_id->pc;
+    /*
     this->Read_Data1 = if_id->Read_Data1;
     this->Read_Data2 = if_id->Read_Data2;
+    */
     this->immed = if_id->immed;
     this->unimmed = if_id->unimmed;
     this->rt = if_id->rt;
@@ -52,6 +56,20 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
 
     this->Read_Data1 = r->reg[this->rs];
     this->Read_Data2 = r->reg[this->rt];
+
+    if(this->forwarding == 1){
+        if(this->fwdrs == 1){
+        this->Read_Data1 = if_id->Read_Data1;
+        }
+        if(this->fwdrt==1){
+        this->Read_Data2 = if_id->Read_Data2;
+        }
+        this->fwdrs = 0;
+        this->fwdrt = 0;
+    }
+
+
+
 
     if(this->stall == 1){
         return;
@@ -242,7 +260,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         id_ex->MemWrite = 0;
         id_ex->Branch = 1;
         ifif->pc_branch = this->pc + 4* if_id->immed;
-        if(r->reg[if_id->rs] == r->reg[if_id->rt])
+        if(this->Read_Data1 == this->Read_Data2)
             ifif->PCSel = 1;
         else
             ifif->PCSel = 0;

@@ -30,6 +30,8 @@ class ID
 
         char out[8];
         int forwarding;
+        int fwdrs;
+        int fwdrt;
         int stall;
         int isNOP;
         void IDdo(IF_ID* if_id, ID_EX* id_ex,IF* ifif,Reg* r);

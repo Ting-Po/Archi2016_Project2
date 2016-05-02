@@ -84,61 +84,73 @@ if(this->isNOP != 1){
                     switch(if_id->funct){
                     case 0x20:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x21:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x22:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x24:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x25:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x26:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x27:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x28:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x2A:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x00:
                         if(if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x02:
                         if(if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x03:
                         if(if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
@@ -151,71 +163,85 @@ if(this->isNOP != 1){
                     switch(if_id->opcode){
                     case 0x08:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x09:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x23:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x21:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x25:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x20:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x24:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x2B:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x29:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x28:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x0C:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x0D:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x0E:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x0A:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
                             this->stall = 1;
                         }
                         break;
@@ -227,16 +253,19 @@ if(this->isNOP != 1){
                 switch(if_id->opcode){
                     case 0x04:
                         if(if_id->rs == this->rd || if_id->rt == this->rd ){
+                            if(this->rd!=0)
                             this->stall =1;
                         }
                         break;
                     case 0x05:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall =1;
                         }
                         break;
                     case 0x07:
                         if(if_id->rs == this->rd || if_id->rt == this->rd){
+                            if(this->rd!=0)
                             this->stall =1;
                         }
                         break;
@@ -250,61 +279,73 @@ if(this->isNOP != 1){
                     switch(if_id->funct){
                     case 0x20:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x21:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x22:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x24:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x25:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x26:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x27:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x28:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x2A:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x00:
                         if(if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x02:
                         if(if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x03:
                         if(if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
@@ -317,71 +358,85 @@ if(this->isNOP != 1){
                     switch(if_id->opcode){
                     case 0x08:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x09:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x23:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x21:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x25:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x20:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x24:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x2B:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x29:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x28:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x0C:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x0D:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x0E:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
                     case 0x0A:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
                             this->stall = 1;
                         }
                         break;
@@ -394,16 +449,19 @@ if(this->isNOP != 1){
                 switch(if_id->opcode){
                     case 0x04:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall =1;
                         }
                         break;
                     case 0x05:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall =1;
                         }
                         break;
                     case 0x07:
                         if(if_id->rs == this->rt || if_id->rt == this->rt){
+                            if(this->rt!=0)
                             this->stall =1;
                         }
                         break;
@@ -697,18 +755,19 @@ if(this->isNOP != 1){
             }
 
         }
-          //printf("if_id:eeeeeeeeeeee%s\n",if_id->out);
             if(this->opcode != 0x23 && this->opcode != 0x21 && this->opcode != 0x25 && this->opcode != 0x20 && this->opcode != 0x24){
             switch(if_id->opcode){
              case 0x04:
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
+                    id->fwdrt = 1;
                     this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
+                    id->fwdrs = 1;
                     this->fwd_rs = 1;
                 }
 
@@ -717,11 +776,13 @@ if(this->isNOP != 1){
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
+                    id->fwdrt = 1;
                     this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
+                    id->fwdrs = 1;
                     this->fwd_rs = 1;
                 }
 
@@ -730,11 +791,13 @@ if(this->isNOP != 1){
                 if(ex_memdst == if_id->rt && ex_memdst!=0){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
+                    id->fwdrt =  1;
                     this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
+                    id->fwdrs = 1;
                     this->fwd_rs = 1;
                 }
                 break;
@@ -746,6 +809,10 @@ if(this->isNOP != 1){
         }
     }
 }
+
+      if(this->isNOP == 1){
+        this->forwarding = 0;
+      }
 
 
       ex_mem->RegWrite = this->RegWrite;
@@ -775,6 +842,7 @@ if(this->isNOP != 1){
             switch(this->funct){
         case 0x20:
             num = Read_Data1 + Read_Data2;
+            rtsign = (unsigned int)this->Read_Data2>>31;
             rdsign = (unsigned int)num>>31;
             if( (rssign==0) & (rtsign == 0 )){
                 if(rdsign==1){
@@ -1014,10 +1082,10 @@ if(this->isNOP != 1){
 
         }
 
-
         ifif->stall = 0;
         id->stall = 0;
         id_ex->isNOP = 0;
+
         if(this->stall == 1){
         ifif->stall = 1;
         id->stall = 1;
@@ -1049,6 +1117,7 @@ if(this->isNOP != 1){
     id_ex->shamt = -1;
     id_ex->address = -1;
     */
+
     this->stall = 0;
     }
 

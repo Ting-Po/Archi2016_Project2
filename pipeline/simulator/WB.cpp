@@ -38,6 +38,9 @@ void WB::WBdo(int* err,MEM_WB* mem_wb, Reg* r)
      this->rt = mem_wb->rt;
      this->rd = mem_wb->rd;
 
+    if(isNOP == 1){
+        return;
+    }
 
      char destination = 0;
      int WriteData = 0;

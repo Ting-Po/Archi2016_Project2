@@ -140,6 +140,8 @@ WB* wb = new WB();
         if(ifif->opcode==0x3f && id->opcode == 0x3f && ex->opcode == 0x3f && mem->opcode == 0x3f && wb->opcode == 0x3f){
             break;
         }
+
+
         fprintf(snap,"cycle %d\n",cycle);
 
         for(i=0;i<32;i++){
@@ -222,6 +224,8 @@ WB* wb = new WB();
         if(err[2]|err[3]){
             break;
         }
+
+
 
     }
 

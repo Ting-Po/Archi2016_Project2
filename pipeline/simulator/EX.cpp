@@ -822,11 +822,13 @@ if(this->isNOP != 1){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrt = 1;
+                  this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrs = 1;
+                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -835,11 +837,13 @@ if(this->isNOP != 1){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrt = 1;
+                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrs = 1;
+                   this->fwd_rs = 1;
                 }
 
                 break;
@@ -848,11 +852,13 @@ if(this->isNOP != 1){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrt =  1;
+                   this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrs = 1;
+                    this->fwd_rs = 1;
                 }
                 break;
             default:
@@ -1150,7 +1156,8 @@ if(this->isNOP != 1){
         strcpy(id_ex->out , "NOP");
         id_ex->isNOP = 1;
 
-        /*
+
+
         id_ex->ALUSrc = -1;
         id_ex->RegDst = -1;
         id_ex->RegWrite = -1;
@@ -1174,7 +1181,7 @@ if(this->isNOP != 1){
     id_ex->rs = -1;
     id_ex->shamt = -1;
     id_ex->address = -1;
-    */
+
 
     this->stall = 0;
     }

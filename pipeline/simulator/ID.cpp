@@ -64,8 +64,8 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         if(this->fwdrt==1){
         this->Read_Data2 = if_id->Read_Data2;
         }
-        this->fwdrs = 0;
-        this->fwdrt = 0;
+        //this->fwdrs = 0;
+        //this->fwdrt = 0;
     }
 
 

@@ -194,17 +194,18 @@ WB* wb = new WB();
             fprintf(snap,"ID: %s fwd_EX-DM_rs_$%d fwd_EX-DM_rt_$%d\n", id->out,ex->ex_memdst,ex->ex_memdst);
             }else if(ex->fwd_rs == 1){
             fprintf(snap,"ID: %s fwd_EX-DM_rs_$%d\n", id->out,ex->ex_memdst);
-            }
-            else if(ex->fwd_rt == 1){
+            }else if(ex->fwd_rt == 1){
             fprintf(snap,"ID: %s fwd_EX-DM_rt_$%d\n", id->out,ex->ex_memdst);
             }
             id->forwarding = 0;
+            //id->fwdrs = 0;
+            //id->fwdrt = 0;
         }else{
         fprintf(snap,"ID: %s\n", id->out);
             }
         }
         if(ex->forwarding == 1){
-            if(ex->fwd_rs == 1 && ex->fwd_rt == 1){
+            if(ex->fwd_rs == 1 && ex->fwd_rt == 1 ){
             fprintf(snap,"EX: %s fwd_EX-DM_rs_$%d fwd_EX-DM_rt_$%d\n", ex->out,ex->ex_memdst,ex->ex_memdst);
             }else if(ex->fwd_rs == 1){
             fprintf(snap,"EX: %s fwd_EX-DM_rs_$%d\n", ex->out,ex->ex_memdst);
@@ -212,6 +213,8 @@ WB* wb = new WB();
             fprintf(snap,"EX: %s fwd_EX-DM_rt_$%d\n", ex->out,ex->ex_memdst);
             }
         ex->forwarding = 0;
+        ex->fwd_rs = 0;
+        ex->fwd_rt = 0;
         }else{
         fprintf(snap,"EX: %s\n", ex->out);
         }
@@ -222,6 +225,8 @@ WB* wb = new WB();
 
           ex->fwd_rs = 0;
         ex->fwd_rt = 0;
+        id->fwdrs = 0;
+        id->fwdrt = 0;
 
         if(err[2]|err[3]){
             break;

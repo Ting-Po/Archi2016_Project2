@@ -70,7 +70,11 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
             strcpy(this->out , "SLT");
             break;
         case 0x00:
+            if(this->instruction == 0){
+                strcpy(this->out , "NOP");
+            }else{
             strcpy(this->out , "SLL");
+            }
             break;
         case 0x02:
             strcpy(this->out , "SRL");

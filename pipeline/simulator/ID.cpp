@@ -274,7 +274,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         id_ex->MemWrite = 0;
         id_ex->Branch = 1;
         ifif->pc_branch = this->pc + 4* if_id->immed;
-        if(r->reg[if_id->rs] != r->reg[if_id->rt])
+        if(this->Read_Data1 != this->Read_Data2)
             ifif->PCSel = 1;
         else
             ifif->PCSel = 0;
@@ -288,7 +288,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         id_ex->MemWrite = 0;
         id_ex->Branch = 1;
         ifif->pc_branch = this->pc+4*if_id->immed;
-        if(r->reg[if_id->rs]>0)
+        if(this->Read_Data1>0)
             ifif->PCSel = 1;
         else
             ifif->PCSel = 0;

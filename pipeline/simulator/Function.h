@@ -3,8 +3,6 @@
 #include "InstruM.h"
 #include "Reg.h"
 #include "Memory.h"
-#include "IF_ID.h"
-#include "ID_EX.h"
 
 class Function
 {
@@ -47,8 +45,6 @@ class Function
         int j(InstruM* ins, int pc, Reg* r,int* err);
         int jal(InstruM* ins, int pc, Reg* r,int* err);
 
-        void IF(InstruM* ins, Reg* r,IF_ID* if_id,int pc);
-        void ID(IF_ID* if_id, ID_EX* id_ex);
     protected:
     private:
 };

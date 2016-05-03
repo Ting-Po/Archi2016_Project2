@@ -33,6 +33,7 @@ EX::EX()
     fwd_rt = 0;
     fwd_rs = 0;
     isNOP = 0;
+    pc = 0;
 }
 
 EX::~EX()
@@ -896,7 +897,7 @@ if(this->isNOP != 1){
     int rttrans = 0;
     unsigned char immedsign = 0;
 
-
+    if(this->isNOP!=1){
       if(this->opcode == 0x00){
             switch(this->funct){
         case 0x20:
@@ -1134,12 +1135,16 @@ if(this->isNOP != 1){
             case 0x0A:
                 ex_mem->ALUresult =  Read_Data1<signimmed;
                 break;
+            case 0x03:
+                ex_mem->ALUresult = id_ex->pc;
+                break;
             default:
                 ex_mem->ALUresult = 0;
                 break;
             }
 
         }
+    }
 
         ifif->stall = 0;
         id->stall = 0;

@@ -316,7 +316,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         id_ex->RegDst = 0;
         id_ex->ALUSrc = 0;
         id_ex->MemtoReg = 0;
-        id_ex->RegWrite = 0;
+        id_ex->RegWrite = 1;
         id_ex->MemRead = 0;
         id_ex->MemWrite = 0;
         id_ex->Branch = 1;
@@ -327,7 +327,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
         temppc = temppc <<24;
 
         ans = temppc|temp;
-        r->reg[31] = this->pc;
+        id_ex->pc = this->pc;
 
         ifif->pc_branch = ans;
         ifif->PCSel = 1;

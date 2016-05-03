@@ -45,6 +45,7 @@ class EX
         int forwarding;
         int isNOP;
         void Exdo(int* err,IF* ifif, ID* id,IF_ID* if_id,ID_EX* id_ex, EX_MEM* ex_mem);
+        int pc;
 
     protected:
     private:

@@ -33,6 +33,7 @@ class ID_EX
         int address;
         char out[8];
         int isNOP;
+        int pc;
 
     protected:
     private:

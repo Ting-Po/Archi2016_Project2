@@ -12,6 +12,9 @@ IF::IF()
     funct = -1;
     stall =0;
     isNOP = 0;
+    rd = 0;
+    rt = 0;
+    shamt = 0;
 
     //ctor
 }
@@ -25,6 +28,9 @@ IF::IF(int pc){
     this->funct = -1;
     this->stall = 0;
     this->isNOP = 0;
+    this->rd = 0;
+    this->rt = 0;
+    this->shamt = 0;
 }
 
 
@@ -38,6 +44,9 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
     this->instruction = ins->Ins[this->pc];
     this->opcode = ins->rtopcode(this->pc);
     this->funct = ins->rtfunct(this->pc);
+    this->rd = ins->rtrd(pc);
+    this->rt = ins->rtrt(pc);
+    this->shamt = ins->rtshamt(pc);
 
 
        if(this->opcode == 0x00){
@@ -70,7 +79,7 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
             strcpy(this->out , "SLT");
             break;
         case 0x00:
-            if(this->instruction == 0){
+            if(this->rt == 0 && this->rd == 0 && this->shamt == 0){
                 strcpy(this->out , "NOP");
             }else{
             strcpy(this->out , "SLL");

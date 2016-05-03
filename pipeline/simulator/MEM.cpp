@@ -508,6 +508,7 @@ void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* e
 
        mem_wb->isNOP = this->isNOP;
         strcpy(mem_wb->out , this->out);
+
         mem_wb->ALUresult = ex_mem->ALUresult;
         mem_wb->MemtoReg = ex_mem->MemtoReg;
         mem_wb->RegWrite = ex_mem->RegWrite;
@@ -530,7 +531,7 @@ void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* e
         return ;
     }
 
-
+    if(this->isNOP!=1){
     if(this->MemWrite == 1){
         switch(this->opcode){
         case 0x2B:
@@ -612,12 +613,13 @@ void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* e
             break;
         }
     }
-
+    }
     this->Readdata = 0;
     mem_wb->Readdata = 0;
 
     temp = 0;
 
+    if(this->isNOP!=1){
     if(this->MemRead == 1){
         switch(this->opcode){
             case 0x23:
@@ -749,6 +751,6 @@ void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* e
                 break;
         }
     }
-
+    }
 
 }

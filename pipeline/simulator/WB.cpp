@@ -1,4 +1,5 @@
 #include "WB.h"
+#include<stdio.h>
 
 WB::WB()
 {
@@ -44,7 +45,8 @@ void WB::WBdo(int* err,MEM_WB* mem_wb, Reg* r)
 
      char destination = 0;
      int WriteData = 0;
-     if(this->RegDst == 0){
+
+    if(this->RegDst == 0){
         destination = this->rt;
      }else{
         destination = this->rd;
@@ -56,19 +58,29 @@ void WB::WBdo(int* err,MEM_WB* mem_wb, Reg* r)
         WriteData = this->Readdata;
      }
 
-     if(this->instruction == 0){
+
+     int nop = this->instruction<<11;
+
+     if(this->opcode == 0 && nop == 0){
         return;
      }
 
 
+     if(this->opcode!=0x03){
      if(this->RegWrite == 1){
         if(destination == 0){
             err[0] = 1;
             return;
         }
-        r->reg[destination] = WriteData;
-     }
 
+        r->reg[destination] = WriteData;
+
+
+     }
+     }else{
+        r->reg[31] = mem_wb->ALUresult;
+
+     }
 
 
 }

@@ -27,6 +27,7 @@ ID_EX::ID_EX()
     address=-1;
     strcpy(out , "NOP");
     isNOP = 0;
+    pc = 0;
 }
 
 ID_EX::~ID_EX()

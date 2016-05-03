@@ -142,6 +142,10 @@ WB* wb = new WB();
         }
 
 
+
+
+
+
         fprintf(snap,"cycle %d\n",cycle);
 
         for(i=0;i<32;i++){
@@ -172,12 +176,13 @@ WB* wb = new WB();
 
 
 
-
         wb->WBdo(err,mem_wb,reg);
         mem->MEMdo(err,id_ex,ex,if_id,n,ex_mem,mem_wb);
         ex->Exdo(err,ifif,id,if_id,id_ex,ex_mem);
         id->IDdo(if_id,id_ex,ifif,reg);
-        ifif->IFdo(snap,m,reg,if_id);
+        ifif->IFdo(snap,m,reg,if_id);\
+
+
 
 
         if(id->stall == 1){
@@ -221,6 +226,8 @@ WB* wb = new WB();
         if(err[2]|err[3]){
             break;
         }
+
+
 
 
 

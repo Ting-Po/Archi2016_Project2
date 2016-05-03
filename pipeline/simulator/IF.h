@@ -22,6 +22,9 @@ class IF
         char opcode;
         char funct;
         char out[8];
+        char rd;
+        char rt;
+        char shamt;
         int stall;
         int isNOP;
 

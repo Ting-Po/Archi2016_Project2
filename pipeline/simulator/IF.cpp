@@ -206,7 +206,7 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
     if(this->instruction == 0){
         strcpy(this->out , "NOP");
         strcpy(if_id->out , this->out);
-        return ;
+        //return ;
     }
 
 

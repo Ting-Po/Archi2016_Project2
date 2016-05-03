@@ -208,15 +208,27 @@ if(this->isNOP != 1){
                             if(this->rd!=0)
                             this->stall = 1;
                         }
+                        if(if_id->rt == this->rd){
+                            if(this->rd!=0)
+                            this->stall = 1;
+                        }
                         break;
                     case 0x29:
                         if(if_id->rs == this->rd){
                             if(this->rd!=0)
                             this->stall = 1;
                         }
+                        if(if_id->rt == this->rd){
+                            if(this->rd!=0)
+                            this->stall = 1;
+                        }
                         break;
                     case 0x28:
                         if(if_id->rs == this->rd){
+                            if(this->rd!=0)
+                            this->stall = 1;
+                        }
+                        if(if_id->rt == this->rd){
                             if(this->rd!=0)
                             this->stall = 1;
                         }
@@ -403,15 +415,27 @@ if(this->isNOP != 1){
                             if(this->rt!=0)
                             this->stall = 1;
                         }
+                        if(if_id->rt == this->rt){
+                            if(this->rt!=0)
+                            this->stall = 1;
+                        }
                         break;
                     case 0x29:
                         if(if_id->rs == this->rt){
                             if(this->rt!=0)
                             this->stall = 1;
                         }
+                        if(if_id->rt == this->rt){
+                            if(this->rt!=0)
+                            this->stall = 1;
+                        }
                         break;
                     case 0x28:
                         if(if_id->rs == this->rt){
+                            if(this->rt!=0)
+                            this->stall = 1;
+                        }
+                        if(if_id->rt == this->rt){
                             if(this->rt!=0)
                             this->stall = 1;
                         }
@@ -677,7 +701,42 @@ if(this->isNOP != 1){
                     this->fwd_rs = 1;
                 }
                 break;
-
+            case 0x2B:
+                if(ex_memdst == this->rs && ex_memdst!=0){
+                    this->Read_Data1 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rs = 1;
+                }
+                if(ex_memdst == this->rt && ex_memdst!=0){
+                    this->Read_Data2 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rt = 1;
+                }
+                break;
+            case 0x29:
+                if(ex_memdst == this->rs && ex_memdst!=0){
+                    this->Read_Data1 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rs = 1;
+                }
+                if(ex_memdst == this->rt && ex_memdst!=0){
+                    this->Read_Data2 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rt = 1;
+                }
+                break;
+            case 0x28:
+                if(ex_memdst == this->rs && ex_memdst!=0){
+                    this->Read_Data1 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rs = 1;
+                }
+                if(ex_memdst == this->rt && ex_memdst!=0){
+                    this->Read_Data2 = ex_mem->ALUresult;
+                    this->forwarding = 1;
+                    this->fwd_rt = 1;
+                }
+                break;
             case 0x0C:
                 if(ex_memdst == this->rs && ex_memdst!=0){
                     this->Read_Data1 = ex_mem->ALUresult;

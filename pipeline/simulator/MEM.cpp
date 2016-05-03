@@ -181,6 +181,36 @@ void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* e
                         ex->stall = 1;
                     }
                     break;
+                case 0x2B:
+                    if(if_id->rs == ex_mem->rd){
+                       if(ex_mem->rd!=0)
+                        ex->stall = 1;
+                    }
+                    if(if_id->rt == ex_mem->rd){
+                       if(ex_mem->rd!=0)
+                        ex->stall = 1;
+                    }
+                    break;
+                case 0x29:
+                    if(if_id->rs == ex_mem->rd){
+                       if(ex_mem->rd!=0)
+                        ex->stall = 1;
+                    }
+                    if(if_id->rt == ex_mem->rd){
+                       if(ex_mem->rd!=0)
+                        ex->stall = 1;
+                    }
+                    break;
+                case 0x28:
+                    if(if_id->rs == ex_mem->rd){
+                       if(ex_mem->rd!=0)
+                        ex->stall = 1;
+                    }
+                    if(if_id->rt == ex_mem->rd){
+                       if(ex_mem->rd!=0)
+                        ex->stall = 1;
+                    }
+                    break;
                 case 0x0C:
                     if(if_id->rs == ex_mem->rd){
                         if(ex_mem->rd!=0)
@@ -352,6 +382,36 @@ void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* e
                 case 0x24:
                     if(if_id->rs == ex_mem->rt){
                          if(ex_mem->rt!=0)
+                        ex->stall = 1;
+                    }
+                    break;
+                case 0x2B:
+                    if(if_id->rs == ex_mem->rt){
+                       if(ex_mem->rt!=0)
+                        ex->stall = 1;
+                    }
+                    if(if_id->rt == ex_mem->rt){
+                       if(ex_mem->rt!=0)
+                        ex->stall = 1;
+                    }
+                    break;
+                case 0x29:
+                    if(if_id->rs == ex_mem->rt){
+                       if(ex_mem->rt!=0)
+                        ex->stall = 1;
+                    }
+                    if(if_id->rt == ex_mem->rt){
+                       if(ex_mem->rt!=0)
+                        ex->stall = 1;
+                    }
+                    break;
+                case 0x28:
+                    if(if_id->rs == ex_mem->rt){
+                       if(ex_mem->rt!=0)
+                        ex->stall = 1;
+                    }
+                    if(if_id->rt == ex_mem->rt){
+                       if(ex_mem->rd!=0)
                         ex->stall = 1;
                     }
                     break;

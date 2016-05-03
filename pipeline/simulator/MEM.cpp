@@ -129,7 +129,13 @@ void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* e
                     }
                     break;
                 case 0x03:
-                    if(if_id->rs == ex_mem->rd || if_id->rt == ex_mem->rd){
+                    if(if_id->rt == ex_mem->rd){
+                        if(ex_mem->rd!=0)
+                        ex->stall = 1;
+                    }
+                    break;
+                case 0x08:
+                    if(if_id->rs == ex_mem->rd){
                         if(ex_mem->rd!=0)
                         ex->stall = 1;
                     }
@@ -333,8 +339,14 @@ void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* e
                     }
                     break;
                 case 0x03:
-                    if(if_id->rs == ex_mem->rt || if_id->rt == ex_mem->rt){
+                    if(if_id->rt == ex_mem->rt){
                          if(ex_mem->rt!=0)
+                        ex->stall = 1;
+                    }
+                    break;
+                case 0x08:
+                    if(if_id->rs == ex_mem->rt){
+                        if(ex_mem->rt!=0)
                         ex->stall = 1;
                     }
                     break;

@@ -155,6 +155,12 @@ if(this->isNOP != 1){
                             this->stall = 1;
                         }
                         break;
+                    case 0x08:
+                    if(if_id->rs == this->rd){
+                        if(this->rd!=0)
+                        this->stall = 1;
+                    }
+                    break;
                     default :
                         break;
                     }
@@ -277,7 +283,7 @@ if(this->isNOP != 1){
                         }
                         break;
                     case 0x07:
-                        if(if_id->rs == this->rd || if_id->rt == this->rd){
+                        if(if_id->rs == this->rd){
                             if(this->rd!=0)
                             this->stall =1;
                         }
@@ -362,6 +368,12 @@ if(this->isNOP != 1){
                             this->stall = 1;
                         }
                         break;
+                    case 0x08:
+                    if(if_id->rs == this->rt){
+                        if(this->rt!=0)
+                        this->stall = 1;
+                    }
+                    break;
                     default :
                         break;
                     }
@@ -485,7 +497,7 @@ if(this->isNOP != 1){
                         }
                         break;
                     case 0x07:
-                        if(if_id->rs == this->rt || if_id->rt == this->rt){
+                        if(if_id->rs == this->rt){
                             if(this->rt!=0)
                             this->stall =1;
                         }
@@ -1181,6 +1193,8 @@ if(this->isNOP != 1){
     id_ex->rs = -1;
     id_ex->shamt = -1;
     id_ex->address = -1;
+
+
 
 
     this->stall = 0;

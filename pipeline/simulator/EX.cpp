@@ -822,13 +822,11 @@ if(this->isNOP != 1){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrt = 1;
-                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrs = 1;
-                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -837,13 +835,11 @@ if(this->isNOP != 1){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrt = 1;
-                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrs = 1;
-                    this->fwd_rs = 1;
                 }
 
                 break;
@@ -852,13 +848,11 @@ if(this->isNOP != 1){
                     if_id->Read_Data2 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrt =  1;
-                    this->fwd_rt = 1;
                 }
                 if(ex_memdst == if_id->rs && ex_memdst!=0){
                     if_id->Read_Data1 = ex_mem->ALUresult;
                     if_id->forwarding = 1;
                     id->fwdrs = 1;
-                    this->fwd_rs = 1;
                 }
                 break;
             default:

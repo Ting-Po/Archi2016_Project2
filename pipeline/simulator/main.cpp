@@ -179,7 +179,8 @@ WB* wb = new WB();
         mem->MEMdo(err,id_ex,ex,if_id,n,ex_mem,mem_wb);
         ex->Exdo(err,ifif,id,if_id,id_ex,ex_mem);
         id->IDdo(if_id,id_ex,ifif,reg);
-        ifif->IFdo(snap,m,reg,if_id);\
+        ifif->IFdo(snap,m,reg,if_id);
+
 
 
 
@@ -189,11 +190,11 @@ WB* wb = new WB();
             id->stall = 0;
         }else{
         if(id->forwarding == 1){
-            if(ex->fwd_rs == 1 && ex->fwd_rt == 1){
+            if(id->fwdrs == 1 && id->fwdrt == 1){
             fprintf(snap,"ID: %s fwd_EX-DM_rs_$%d fwd_EX-DM_rt_$%d\n", id->out,ex->ex_memdst,ex->ex_memdst);
-            }else if(ex->fwd_rs == 1){
+            }else if(id->fwdrs == 1){
             fprintf(snap,"ID: %s fwd_EX-DM_rs_$%d\n", id->out,ex->ex_memdst);
-            }else if(ex->fwd_rt == 1){
+            }else if(id->fwdrt == 1){
             fprintf(snap,"ID: %s fwd_EX-DM_rt_$%d\n", id->out,ex->ex_memdst);
             }
             id->forwarding = 0;

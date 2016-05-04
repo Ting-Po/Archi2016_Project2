@@ -328,6 +328,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
 
         ans = temppc|temp;
         id_ex->pc = this->pc;
+        id_ex->rt=31;
 
         ifif->pc_branch = ans;
         ifif->PCSel = 1;
@@ -359,7 +360,7 @@ void ID::IDdo(IF_ID* if_id,ID_EX* id_ex,IF* ifif,Reg* r)
     if(if_id->opcode == 0x00 && if_id->funct==0x08){
         id_ex->RegDst = 0;
         id_ex->RegWrite = 0;
-        ifif->pc_branch = id_ex->Read_Data1;
+        ifif->pc_branch = this->Read_Data1;
         ifif->PCSel = 1;
     }
 

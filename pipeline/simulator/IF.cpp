@@ -158,6 +158,7 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
                 strcpy(this->out , "J");
                 break;
             case 0x03:
+                if_id->rt = 31;
                 strcpy(this->out , "JAL");
                 break;
             case 0x3F:

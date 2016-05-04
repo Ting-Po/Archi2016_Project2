@@ -162,9 +162,6 @@ void IF::IFdo(FILE* snap,InstruM* ins,Reg* r, IF_ID* if_id)
                 break;
             case 0x3F:
                 strcpy(this->out , "HALT");
-    if_id->rs = -1;
-    if_id->rt = -1;
-    if_id->rd = -1;
                 break;
             default:
                 break;

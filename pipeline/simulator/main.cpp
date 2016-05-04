@@ -144,7 +144,6 @@ WB* wb = new WB();
 
 
 
-
         fprintf(snap,"cycle %d\n",cycle);
 
         for(i=0;i<32;i++){

@@ -77,6 +77,7 @@ void EX::Exdo(int* err,IF* ifif,ID* id,IF_ID* if_id,ID_EX* id_ex,EX_MEM* ex_mem)
     if_id->forwarding = 0;
 
 
+
 if(this->isNOP != 1){
     if(this->RegWrite == 1){
         if(this->RegDst == 1){
@@ -155,16 +156,19 @@ if(this->isNOP != 1){
                             this->stall = 1;
                         }
                         break;
-                    case 0x08:
-                    if(if_id->rs == this->rd){
-                        if(this->rd!=0)
-                        this->stall = 1;
-                    }
-                    break;
                     default :
                         break;
                     }
                 }
+                if(if_id->funct == 0x08){
+                    if(if_id->rs == this->rd){
+                        if(this->rd!=0)
+                            this->stall = 1;
+                    }
+
+                }
+
+
              }else{
                  if(this->opcode == 0x23|| this->opcode == 0x21 || this->opcode == 0x25 || this->opcode == 0x20 || this->opcode == 0x24){
                     switch(if_id->opcode){
@@ -289,7 +293,6 @@ if(this->isNOP != 1){
                             this->stall =1;
                         }
                         break;
-
                     default:
                         break;
                 }
@@ -370,16 +373,18 @@ if(this->isNOP != 1){
                             this->stall = 1;
                         }
                         break;
-                    case 0x08:
-                    if(if_id->rs == this->rt){
-                        if(this->rt!=0)
-                        this->stall = 1;
-                    }
-                    break;
                     default :
                         break;
                     }
                 }
+                 if(if_id->funct == 0x08){
+                    if(if_id->rs == this->rt){
+                        if(this->rt!=0)
+                            this->stall = 1;
+                    }
+
+                }
+
         }else{
                 if(this->opcode == 0x23|| this->opcode == 0x21 || this->opcode == 0x25 || this->opcode == 0x20 || this->opcode == 0x24){
                     switch(if_id->opcode){

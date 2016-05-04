@@ -427,7 +427,7 @@ void MEM::MEMdo(int* err,ID_EX* id_ex ,EX* ex,IF_ID* if_id,Memory* mem,EX_MEM* e
                         ex->stall = 1;
                     }
                     if(if_id->rt == ex_mem->rt){
-                       if(ex_mem->rd!=0)
+                       if(ex_mem->rt!=0)
                         ex->stall = 1;
                     }
                     break;
